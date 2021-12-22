@@ -15,12 +15,12 @@ public class Account {
 
     @Id
     @Column(name = "account_id", length = 10, unique = true)
-//    @GeneratedValue(generator = "account-generator")
-//    @GenericGenerator(
-//            name = "account-generator",
-//            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "ACC"),
-//            strategy = "fpt.trainining.movietheatre.generator.MyGenerator"
-//    )
+    @GeneratedValue(generator = "account-generator")
+    @GenericGenerator(
+            name = "account-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "ACC"),
+            strategy = "fpt.training.authservice.generator.MyGenerator"
+    )
     private String accountId;
 
     @Column(unique = true)
