@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AuthService/AuthService.iml" filepath="$PROJECT_DIR$/AuthService/AuthService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EurekaServer/EurekaServer.iml" filepath="$PROJECT_DIR$/EurekaServer/EurekaServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MovieTheatre/MovieTheatre.iml" filepath="$PROJECT_DIR$/MovieTheatre/MovieTheatre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MovieTheatreMicroservice.iml" filepath="$PROJECT_DIR$/.idea/MovieTheatreMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZuulGateway/ZuulGateway.iml" filepath="$PROJECT_DIR$/ZuulGateway/ZuulGateway.iml" />
+    </modules>
+  </component>
+</project>
