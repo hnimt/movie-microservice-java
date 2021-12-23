@@ -69,6 +69,26 @@ services:
     networks:
       - microservicesnet
 
+  excel:
+    image: microservice/excel
+    container_name: excel
+    build:
+      context: .
+      dockerfile: ./ExcelService/Dockerfile
+    ports:
+      - "8300:8300"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/movie_theatre?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      - spring.datasource.username=root
+      - spring.datasource.password=root
+      - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+    depends_on:
+      - eureka
+      - movie
+      - mysqldb
+    networks:
+      - microservicesnet
+
   mysqldb:
     platform: linux/x86_64
     image: mysql:5.7

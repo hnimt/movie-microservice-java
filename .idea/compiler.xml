@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
+        <module name="ExcelService" />
         <module name="ZuulGateway" />
         <module name="MovieTheatre" />
         <module name="AuthService" />
@@ -16,6 +17,7 @@
     <bytecodeTargetLevel>
       <module name="AuthService" target="1.8" />
       <module name="EurekaServer" target="1.8" />
+      <module name="ExcelService" target="1.8" />
       <module name="MovieTheatre" target="1.8" />
       <module name="ZuulGateway" target="1.8" />
     </bytecodeTargetLevel>
@@ -24,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AuthService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
+      <module name="ExcelService" options="-parameters" />
       <module name="MovieTheatre" options="-parameters" />
       <module name="ZuulGateway" options="-parameters" />
     </option>
