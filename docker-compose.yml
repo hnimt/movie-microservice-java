@@ -41,9 +41,11 @@ services:
       - spring.datasource.username=root
       - spring.datasource.password=root
       - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+      - spring.redis.host=redisdb
     depends_on:
       - eureka
       - mysqldb
+      - redisdb
     networks:
       - microservicesnet
 
@@ -80,10 +82,21 @@ services:
     networks:
       - microservicesnet
 
+  redisdb:
+    container_name: redis
+    image: redis
+    ports:
+    - "6379:6379"
+    networks:
+    - microservicesnet
+    volumes:
+    - cache_data:/var/lib/redis
+
 networks:
   microservicesnet:
     driver: bridge
 
 volumes:
   db_data:
+  cache_data:
 

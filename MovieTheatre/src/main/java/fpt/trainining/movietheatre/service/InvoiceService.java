@@ -11,5 +11,5 @@ public interface InvoiceService {
     List<Invoice> findByAccountId(String accountId);
     List<Invoice> findByAccountName(String accountName);
     Invoice findById(String id);
-    Invoice confirmInvoice(InvoiceConfirmReq req, String username);
+    Invoice confirmInvoice(InvoiceConfirmReq req);
 }

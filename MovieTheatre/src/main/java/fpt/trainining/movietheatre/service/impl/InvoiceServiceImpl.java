@@ -7,6 +7,9 @@ import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.InvoiceRepository;
 import fpt.trainining.movietheatre.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final AccountService accountService;
 
     @Override
+    @Cacheable(value = "allInvoices")
     public List<Invoice> findAll() {
         return invoiceRepository.findAll();
     }
@@ -38,12 +42,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
+    @Cacheable(value = "invoicesByAccount", key = "#accountId")
     public List<Invoice> findByAccountId(String accountId) {
         return invoiceRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot found invoices"));
     }
 
     @Override
+
     public List<Invoice> findByAccountName(String accountName) {
         Account account = accountService.findByUsername(accountName);
         return invoiceRepository.findByAccount(account)
@@ -57,9 +63,13 @@ public class InvoiceServiceImpl implements InvoiceService {
      */
     @Override
     @Transactional
-    public Invoice confirmInvoice(InvoiceConfirmReq req, String username) {
+    @Caching(evict = {
+            @CacheEvict("allInvoices"),
+            @CacheEvict(value = "invoicesByAccount", key = "#req.getAccounId()")
+    })
+    public Invoice confirmInvoice(InvoiceConfirmReq req) {
         Invoice invoice = new Invoice();
-        Account account = accountService.findByUsername(username);
+        Account account = accountService.findById(req.getAccountId());
         Member member = memberService.findByAccount(account);
         Movie movie = movieService.findById(req.getMovieId());
         ShowDate showDate = showDateService.findById(req.getShowTimeId());

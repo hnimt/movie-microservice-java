@@ -20,16 +20,20 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
     @GetMapping
-    public ResponseEntity getAll(Principal principal) {
-        String username = principal.getName();
-        List<Invoice> res = invoiceService.findByAccountName(username);
+    public ResponseEntity getAll() {
+        List<Invoice> res = invoiceService.findAll();
+        return ResponseHandler.generateResponse("Get invoices successfully!", HttpStatus.OK, res);
+    }
+
+    @GetMapping("/{accountId}")
+    public ResponseEntity getById(@PathVariable String accountId) {
+        List<Invoice> res = invoiceService.findByAccountId(accountId);
         return ResponseHandler.generateResponse("Get invoices successfully!", HttpStatus.OK, res);
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody InvoiceConfirmReq req, Principal principal) {
-        String username = principal.getName();
-        Invoice res = invoiceService.confirmInvoice(req, username);
+    public ResponseEntity create(@RequestBody InvoiceConfirmReq req) {
+        Invoice res = invoiceService.confirmInvoice(req);
         return ResponseHandler.generateResponse("Create invoice successfully!", HttpStatus.CREATED, res);
     }
 }

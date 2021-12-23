@@ -9,7 +9,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Data
 public class InvoiceConfirmReq {
-//    private String memberId;
+    private String accountId;
     private Integer addScore;
     private LocalDate bookingDate;
     private String movieId;
